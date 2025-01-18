@@ -51,7 +51,7 @@ A dedicated App Service Plan is used to host and scale the application on Azure.
 
 ### Prerequisites
 - Python 3.9+
-- Docker (if using containerization)
+- Docker
 
 ### Running the Application
 
