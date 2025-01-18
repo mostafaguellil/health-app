@@ -36,7 +36,7 @@ The **Health Calculator** application provides an intuitive platform for users t
 ## Deployment
 The application is deployed on **Azure**. To access the live version, visit the deployment URL:
 ```
-https://health-app-cddfbebjheergufc.canadacentral-01.azurewebsites.net
+https://health-app-final-bfb6a8cagxftbhbd.francecentral-01.azurewebsites.net/
 ```
 
 ## Resource Group Creation
@@ -58,8 +58,8 @@ A dedicated App Service Plan is used to host and scale the application on Azure.
 #### Using Docker
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/mostafaguellil/health-calculator-service 
-   cd health-calculator-service
+   git clone https://github.com/mostafaguellil/health-app 
+   cd health-app
    ```
 
 2. **Build, Test, and Run**:
