@@ -1,7 +1,7 @@
 # Health Calculator Application
 
 ## Overview
-The **Health Calculator** application provides an intuitive platform for users to calculate their **BMI (Body Mass Index)** and **BMR (Basal Metabolic Rate)**. Built using **Flask**, it features a responsive web interface and is optimized for deployment in any environment. The application supports testing with **pytest** and offers automation through a **Makefile**.
+The **Health Calculator** application provides an intuitive platform for users to calculate their **BMI (Body Mass Index)** and **BMR (Basal Metabolic Rate)**. Built using **Flask**, it features a responsive web interface optimized for desktop, tablet, and mobile devices. The design has been adapted specifically to ensure seamless usage on mobile versions. The application supports testing with **pytest** and offers automation through a **Makefile**.
 
 ---
 
@@ -38,11 +38,13 @@ The application is deployed on **Azure**. To access the live version, visit the 
 ```
 https://health-app-cddfbebjheergufc.canadacentral-01.azurewebsites.net
 ```
-## Resource Group Creation:
+
+## Resource Group Creation
 A resource group was created to organize and manage all the associated Azure resources for the application. This acts as a container to group services like App Service, App Service Plan, and storage.
-![resource_group](image-1.png)
-## App Service Plan Setup:
-![app_service](image.png)
+
+## App Service Plan Setup
+A dedicated App Service Plan is used to host and scale the application on Azure.
+
 ---
 
 ## Setup and Usage
@@ -125,6 +127,3 @@ This project uses **GitHub Actions** for automated testing:
 - Workflow file: `.github/workflows/ci.yml`
 - On each push or pull request, tests are executed to ensure functionality.
 
----
-## Output
-![health-app](image-2.png)
