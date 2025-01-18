@@ -1,72 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Previous head and style sections remain the same -->
 <head>
-    <!-- ... (keep all the existing head content and styles) ... -->
+    <meta charset="UTF-8">
+    <link rel="icon" type="" href="health-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Calculator</title>
+    <style>
+        :root {
+            --primary-color: #2a9d8f;
+            --secondary-color: #264653;
+            --background-color: #f9f9f9;
+            --card-background: #ffffff;
+            --result-background: #e9f5f3;
+            --border-color: #ccc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--secondary-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 30px;
+        }
+
+        header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .calculators-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .calculator {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--card-background);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator h2 {
+            grid-column: span 2;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            font-size: 1.5em;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        button {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button {
+            grid-column: span 2;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #21867a;
+        }
+
+        .result {
+            grid-column: span 2;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--result-background);
+            border: 1px solid #bcdad6;
+            border-radius: 5px;
+            display: none;
+        }
+
+        aside {
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--card-background);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        aside h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5em;
+            color: var(--primary-color);
+        }
+
+        aside p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .calculator {
+                grid-template-columns: 1fr;
+            }
+
+            .calculator h2 {
+                grid-column: span 1;
+            }
+
+            button {
+                grid-column: span 1;
+            }
+
+            .result {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .calculator, aside {
+                padding: 15px;
+            }
+
+            .form-group input,
+            .form-group select,
+            button {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            aside p {
+                font-size: 13px;
+            }
+
+            footer {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .calculator, aside {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- ... (keep all the existing body content) ... -->
-    
-    <script>
-        // BMI Calculator
-        document.getElementById('bmiForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const height = parseFloat(document.getElementById('height').value);
-            const weight = parseFloat(document.getElementById('weight').value);
-            
-            if (height > 0 && weight > 0) {
-                const bmi = weight / (height * height);
-                const result = document.getElementById('bmiResult');
-                
-                let category;
-                if (bmi < 18.5) category = 'Underweight';
-                else if (bmi < 25) category = 'Normal weight';
-                else if (bmi < 30) category = 'Overweight';
-                else category = 'Obese';
-                
-                result.innerHTML = `
-                    <p>Your BMI is: <strong>${bmi.toFixed(1)}</strong></p>
-                    <p>Category: <strong>${category}</strong></p>
-                `;
-                result.style.display = 'block';
-            }
-        });
+    <div class="container">
+        <header>
+            <h1>Health Calculator</h1>
+        </header>
 
-        // BMR Calculator
-        document.getElementById('bmrForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const height = parseFloat(document.getElementById('bmrHeight').value);
-            const weight = parseFloat(document.getElementById('bmrWeight').value);
-            const age = parseInt(document.getElementById('age').value);
-            const gender = document.getElementById('gender').value;
-            
-            if (height > 0 && weight > 0 && age > 0) {
-                let bmr;
-                if (gender === 'male') {
-                    // Mifflin-St Jeor Equation for males
-                    bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
-                } else {
-                    // Mifflin-St Jeor Equation for females
-                    bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
-                }
-                
-                const result = document.getElementById('bmrResult');
-                result.innerHTML = `
-                    <p>Your BMR is: <strong>${Math.round(bmr)} calories/day</strong></p>
-                    <p>Daily calorie needs based on activity level:</p>
-                    <ul style="list-style: none; padding-left: 0;">
-                        <li>Sedentary: ${Math.round(bmr * 1.2)} calories</li>
-                        <li>Light Exercise: ${Math.round(bmr * 1.375)} calories</li>
-                        <li>Moderate Exercise: ${Math.round(bmr * 1.55)} calories</li>
-                        <li>Heavy Exercise: ${Math.round(bmr * 1.725)} calories</li>
-                        <li>Athlete: ${Math.round(bmr * 1.9)} calories</li>
-                    </ul>
-                `;
-                result.style.display = 'block';
-            }
-        });
-    </script>
+        <div class="calculators-container">
+            <div class="calculator">
+                <h2>BMI Calculator</h2>
+                <form id="bmiForm" style="display: contents;">
+                    <div class="form-group">
+                        <label for="height">Height (meters):</label>
+                        <input type="number" id="height" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Weight (kg):</label>
+                        <input type="number" id="weight" step="0.1" required>
+                    </div>
+                    <button type="submit">Calculate BMI</button>
+                </form>
+                <div id="bmiResult" class="result"></div>
+            </div>
+
+            <div class="calculator">
+                <h2>BMR Calculator</h2>
+                <form id="bmrForm" style="display: contents;">
+                    <div class="form-group">
+                        <label for="bmrHeight">Height (cm):</label>
+                        <input type="number" id="bmrHeight" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bmrWeight">Weight (kg):</label>
+                        <input type="number" id="bmrWeight" step="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender:</label>
+                        <select id="gender" required>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <button type="submit">Calculate BMR</button>
+                </form>
+                <div id="bmrResult" class="result"></div>
+            </div>
+        </div>
+
+        <aside>
+            <h2>About BMI and BMR</h2>
+            <p><strong>BMI</strong> (Body Mass Index) evaluates body weight relative to height, offering insight into potential weight-related health risks like obesity or underweight.</p>
+            <p><strong>BMR</strong> (Basal Metabolic Rate) measures the minimum amount of energy your body needs at rest to maintain basic functions.</p>
+        </aside>
+
+        <footer>
+            <p>Health Calculator deployed by <strong>Mostafa GUELLIL</strong>. Check out:</p>
+            <p><a href="https://github.com/mostafaguellil" target="_blank">GitHub</a> | <a href="https://mostafaguellil.github.io/portfolio-app/" target="_blank">Portfolio</a></p>
+        </footer>
+    </div>
 </body>
 </html>
